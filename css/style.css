@@ -2,6 +2,7 @@
 
 body {
 	font-family: "Roboto", sans-serif;
+	margin-top: 77px;
 }
 
 header {
@@ -119,6 +120,72 @@ section {
 .area_quizz {
 }
 
+.create-quizz {
+	max-width: 1051px;
+	width: 90%;
+}
+
+.create-quizz p {
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 23px;
+	text-align: center;
+
+	color: #000000;
+}
+
+.create-quizz input {
+	width: 100%;
+	height: 46px;
+	border-radius: 5px;
+	border: 1px solid #d1d1d1;
+	margin-bottom: 15px;
+}
+.create-quizz input:last-of-type {
+	margin-bottom: 80px;
+}
+
+input {
+	box-sizing: border-box;
+	padding-left: 20px;
+}
+::placeholder {
+	font-style: italic;
+	font-weight: 400;
+	font-size: 19px;
+	line-height: 22px;
+
+	color: #bababa;
+}
+
+.input-space {
+	background-color: #ffffff;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 20px;
+	border-radius: 5px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.input-space button {
+	width: 360px;
+	height: 54px;
+
+	background: #ec362d;
+	border-radius: 15px;
+	border: none;
+
+	font-style: normal;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 21px;
+
+	color: #fff5f4;
+}
+
 .quizz-item {
 	width: 100%;
 	height: 181px;
@@ -162,6 +229,7 @@ section {
 	word-break: break-all;
 }
 
+/*===== TELAS MAIORES QUE 810PX =====*/
 @media (min-width: 810px) {
 	.content-quizz {
 		display: flex;
@@ -173,5 +241,12 @@ section {
 	}
 	.quizz-item:nth-child(even) {
 		margin: auto 1%;
+	}
+}
+
+/*===== TELAS MENORES QUE 810PX =====*/
+@media (max-width: 810px) {
+	.input-space button {
+		width: 75%;
 	}
 }

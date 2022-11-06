@@ -20,13 +20,42 @@
 				</div>
 				<div class="area_quizz"></div>
 			</div>
+
 			<div class="make_quizz">
 				<p>
 					Você não criou nenhum<br />
 					quizz ainda :(
 				</p>
 				<div class="buttom_quizz">
-					<p>Criar Quizz</p>
+					<p onclick="showCreateQuizzPage()">Criar Quizz</p>
+				</div>
+			</div>
+
+			<!--CRIAR QUIZZ-->
+			<div class="create-quizz invisible">
+				<div class="start">
+					<p>Comece pelo começo</p>
+					<div class="input-space">
+						<input
+							type="text"
+							class="title"
+							placeholder="Título do seu quizz" />
+						<input
+							type="text"
+							class="url"
+							placeholder="URL da imagem do seu quizz" />
+						<input
+							type="text"
+							class="nQuestions"
+							placeholder="Quantidade de perguntas do quizz" />
+						<input
+							type="text"
+							class="nLevels"
+							placeholder="Quantidade de níveis do quizz" />
+						<button onclick="checkBasicInfo()">
+							Prosseguir para criar perguntas
+						</button>
+					</div>
 				</div>
 			</div>
 

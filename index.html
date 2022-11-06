@@ -9,63 +9,141 @@
 		<title>BuzzQuizz</title>
 	</head>
 	<body>
-		<header>
-			<p>BuzzQuizz</p>
-		</header>
-		<section>
-			<div class="your_quizz invisible">
-				<div class="title_add">
-					<p>Seus Quizzes</p>
-					<ion-icon onclick="" name="add-circle"></ion-icon>
+		<div id="container_1" class="">
+			<header>
+				<p>BuzzQuizz</p>
+			</header>
+			<section>
+				<div class="your_quizz invisible">
+					<div class="title_add">
+						<p>Seus Quizzes</p>
+						<ion-icon onclick="" name="add-circle"></ion-icon>
+					</div>
+					<div class="area_quizz"></div>
 				</div>
-				<div class="area_quizz"></div>
-			</div>
 
-			<div class="make_quizz">
-				<p>
-					Você não criou nenhum<br />
-					quizz ainda :(
-				</p>
-				<div class="buttom_quizz">
-					<p onclick="showCreateQuizzPage()">Criar Quizz</p>
-				</div>
-			</div>
-
-			<!--CRIAR QUIZZ-->
-			<div class="create-quizz invisible">
-				<div class="start">
-					<p>Comece pelo começo</p>
-					<div class="input-space">
-						<input
-							type="text"
-							class="title"
-							placeholder="Título do seu quizz" />
-						<input
-							type="text"
-							class="url"
-							placeholder="URL da imagem do seu quizz" />
-						<input
-							type="text"
-							class="nQuestions"
-							placeholder="Quantidade de perguntas do quizz" />
-						<input
-							type="text"
-							class="nLevels"
-							placeholder="Quantidade de níveis do quizz" />
-						<button onclick="checkBasicInfo()">
-							Prosseguir para criar perguntas
-						</button>
+				<div class="make_quizz">
+					<p>
+						Você não criou nenhum<br />
+						quizz ainda :(
+					</p>
+					<div class="buttom_quizz">
+						<p onclick="showCreateQuizzPage()">Criar Quizz</p>
 					</div>
 				</div>
-			</div>
 
-			<div class="all_quizz">
-				<p>Todos os Quizzes</p>
-				<div class="content-quizz">
-					<!--CONTEUDO INSERIDO PELO JS-->
+				<!--CRIAR QUIZZ-->
+				<div class="create-quizz invisible">
+					<div class="start">
+						<p>Comece pelo começo</p>
+						<div class="input-space">
+							<input
+								type="text"
+								class="title"
+								placeholder="Título do seu quizz" />
+							<input
+								type="text"
+								class="url"
+								placeholder="URL da imagem do seu quizz" />
+							<input
+								type="text"
+								class="nQuestions"
+								placeholder="Quantidade de perguntas do quizz" />
+							<input
+								type="text"
+								class="nLevels"
+								placeholder="Quantidade de níveis do quizz" />
+							<button onclick="checkBasicInfo()">
+								Prosseguir para criar perguntas
+							</button>
+						</div>
+					</div>
 				</div>
+				<div class="all_quizz">
+					<p>Todos os Quizzes</p>
+					<div class="content_quizz"></div>
+				</div>
+			</section>
+		</div>
+		<!--fim div conteiner 1-->
+		<div id="container_3" class="container_3 invisible">
+			<header>
+				<p>BuzzQuizz</p>
+			</header>
+			<div class="titulo_p">
+				<p>Crie suas perguntas</p>
 			</div>
-		</section>
+			<section class="tela_perguntas">
+				<div class="pergunta_x_box" id="p_1">
+					<p>Pergunta 1</p>
+					<ion-icon
+						onclick="toggle_pergunta(this)"
+						name="create-outline"></ion-icon>
+				</div>
+				<div class="pergunta_x invisible" id="p_1">
+					<div class="pergunta">
+						<p>Pergunta 1</p>
+						<input
+							class="input1"
+							type="text"
+							placeholder="Texto da pergunta" />
+						<input
+							class="input2"
+							type="text"
+							placeholder="Cor de fundo da pergunta" />
+					</div>
+					<div class="resposta_c">
+						<p>Resposta correta</p>
+						<input
+							class="input3"
+							type="text"
+							placeholder="Resposta correta" />
+						<input
+							class="input4"
+							type="text"
+							placeholder="URL da imagem" />
+					</div>
+					<div class="respostas_i_1">
+						<p>Respostas incorretas</p>
+						<input
+							class="input5"
+							type="text"
+							placeholder="Resposta errada 1" />
+						<input
+							class="input6"
+							type="text"
+							placeholder="URL da imagem 1" />
+					</div>
+					<div class="respostas_i_2">
+						<input
+							class="input7"
+							type="text"
+							placeholder="Resposta errada 2" />
+						<input
+							class="input8"
+							type="text"
+							placeholder="URL da imagem 2" />
+					</div>
+					<div class="respostas_i_3">
+						<input
+							class="input9"
+							type="text"
+							placeholder="Resposta errada 3" />
+						<input
+							class="input10"
+							type="text"
+							placeholder="URL da imagem 3" />
+					</div>
+				</div>
+				<!--fim pergunta_x-->
+			</section>
+			<footer>
+				<div onclick="finish_questions()" class="finish_bt">
+					<p>Prosseguir para criar níveis</p>
+				</div>
+			</footer>
+		</div>
+		<!--fim div conteiner 3-->
 
 		<script
 			type="module"
@@ -73,7 +151,6 @@
 		<script
 			nomodule
 			src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<script src="script.js"></script>
 	</body>
 </html>

@@ -1,37 +1,130 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="css/reset.css" />
-		<link rel="stylesheet" href="css/style.css" />
-		<title>BuzzQuizz</title>
-	</head>
-	<body>
-		<div id="container_1" class=>
-			<header>
-				<p>BuzzQuizz</p>
-			</header>
-			<section>
-				<div class="your_quizz invisible">
-					<div class="title_add">
-						<p>Seus Quizzes</p>
-						<ion-icon onclick="" name="add-circle"></ion-icon>
-					</div>
-					<div class="area_quizz"></div>
-				</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>BuzzQuizz</title>
+  </head>
+  <body>
+    <div id="container_1" class=>
+      <header>
+        <p>BuzzQuizz</p>
+      </header>
+      <section>
+        <div class="your_quizz invisible">
+          <div class="title_add">
+            <p>Seus Quizzes</p>
+            <ion-icon onclick="showCreateQuizzPage()" name="add-circle"></ion-icon>
+          </div>
+          <div class="area_quizz"></div>
+        </div>
 
-				<div class="make_quizz">
-					<p>
-						Você não criou nenhum<br />
-						quizz ainda :(
-					</p>
-					<div class="buttom_quizz">
-						<p onclick="showCreateQuizzPage()">Criar Quizz</p>
-					</div>
-				</div>
+        <div class="make_quizz">
+          <p>
+            Você não criou nenhum<br />
+            quizz ainda :(
+          </p>
+          <div class="buttom_quizz">
+            <p onclick="showCreateQuizzPage()">Criar Quizz</p>
+          </div>
+        </div>
 
+        <!--CRIAR QUIZZ-->
+        <div class="create-quizz invisible">
+          <div class="start">
+            <p>Comece pelo começo</p>
+            <div class="input-space">
+              <input
+                type="text"
+                class="title"
+                placeholder="Título do seu quizz"
+								value="teste"
+              />
+              <input
+                type="text"
+                class="url"
+                placeholder="URL da imagem do seu quizz"
+								value="https://teste.com"
+								/>
+              <input
+                type="number"
+                class="nQuestions"
+                placeholder="Quantidade de perguntas do quizz"
+								value="3"
+								/>
+              <input
+                type="number"
+                class="nLevels"
+                placeholder="Quantidade de níveis do quizz"
+								value="2"
+								/>
+              <button onclick="checkBasicInfo()">
+                Prosseguir para criar perguntas
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="all_quizz">
+          <p>Todos os Quizzes</p>
+          <div class="content_quizz"></div>
+        </div>
+      </section>
+    </div>
+    <!--fim div conteiner 1-->
+    <div id="container_3" class="container_3 invisible">
+      <header>
+        <p>BuzzQuizz</p>
+      </header>
+      <div class="titulo_p">
+        <p>Crie suas perguntas</p>
+      </div>
+      <section class="tela_perguntas">
+      </section>
+      <footer>
+        <div onclick="finish_questions()" class="finish_bt">
+          <p>Prosseguir para criar níveis</p>
+        </div>
+      </footer>
+    </div>
+    <!--fim div conteiner 3-->
+    <div id="container_4" class="container_3 invisible">
+      <header>
+        <p>BuzzQuizz</p>
+      </header>
+      <div class="titulo_p">
+        <p>Agora, decida os níveis!</p>
+      </div>
+      <section class="tela_niveis">
+      </section>
+      <footer>
+        <div onclick="finish_quizz()" class="finish_bt">
+          <p>Finalizar Quizz</p>
+        </div>
+      </footer>
+    </div>
+    <!--fim div conteiner 4-->
+    <div id="container_5" class="container_3 invisible">
+      <header>
+        <p>BuzzQuizz</p>
+      </header>
+      <div class="titulo_p">
+        <p>Seu quizz está pronto!</p>
+      </div>
+      <section class="tela_niveis">
+      </section>
+      <footer>
+        <div id="access_quizz">
+          <p>Acessar Quizz</p>
+        </div>
+        <div onclick="backToHome()" class="back_to_home">
+          <p>Voltar para home</p>
+        </div>
+      </footer>
+    </div>
+    <!--fim div conteiner 4-->
 				<div class="all_quizz">
 					<p>Todos os Quizzes</p>
 					<div class="content_quizz"></div>
@@ -188,12 +281,15 @@
 		</div>
 
 
-		<script
-			type="module"
-			src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-		<script
-			nomodule
-			src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-		<script src="script.js"></script>
-	</body>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>

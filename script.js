@@ -76,19 +76,74 @@ function renderMyQuizzes(quizzList) {
 
 function showQuizzPage(id) {
 
+	const cont1 = document.getElementById("container_1");
+	cont1.classList.add("invisible");
+	const screenQuizz = document.querySelector(".show_quizz_conteiner");
+	screenQuizz.classList.remove("invisible");
 
-  const promise = axios.get(`${apiUrl}quizzes/${id}`);
 
-  //recebendo quizz específico do srv
-  promise.then(renderQuizz);
-  promise.catch(catchError);
-  alert("a ser implementado \nir pra quizz " + id);
+
+	const promise = axios.get(`${apiUrl}quizzes/${id}`);
+
+	//recebendo quizz específico do srv
+	promise.then(renderQuizz);
+	promise.catch(catchError);
+	alert("a ser implementado \nir pra quizz " + id);
 }
 
 
 function renderQuizz(response) {
-  // Exibir tela de quizz específico
-}
+  const tela = document.querySelector(".show_quizz_conteiner");
+  const tela_title = document.querySelector(".q_quizz")
+
+  const data_quizz = response.data
+  const data_quizz_questions = data_quizz.questions
+  console.log(data_quizz_questions[0].answers[0])
+
+  tela.innerHTML += `
+  
+  	<div class="title_quizz">
+	  	<img class="image_title" src="${data_quizz.image}" alt="">
+  	  <p>${data_quizz.title}</p>
+	</div>`
+
+
+
+
+  for(let i=0; i< data_quizz_questions.length;i++){
+    tela.innerHTML += `
+    <div class="question_quizz">
+      <div class="q_quizz">
+        <p>${data_quizz_questions[i].title}</p>
+      </div>
+      <div class="alternatives">
+        <div class="line_1">
+          <div>
+            <img class="alternative_1" src="${data_quizz_questions[i].answers[0].image}" alt="">
+            <p>${data_quizz.quetions[i].answers[0].title}</p>
+          </div>
+          <div>
+            <img class="alternative_2" src="${data_quizz_questions[i].answers[1].image}" alt="">
+            <p>${data_quizz.quetions[i].answers[1].title}</p>
+          </div>
+        </div>
+        <div class="line_2">
+          <div>
+            <img  class="alternative_3" src="${data_quizz_questions[i].answers[2].image}" alt="">
+            <p>${data_quizz.quetions[i].answers[2].title}</p>
+          </div>
+          <div>
+            <img  class="alternative_4" src="${data_quizz_questions[i].answers[3].image}" alt="">
+            <p>${data_quizz.quetions[i].answers[3].title}</p>
+          </div>
+        </div>
+      </div>	
+    </div>`
+
+    tela_title.style.backgroundColor = `${data_quizz_questions[i].color}`
+  
+
+}}
 
 const final_list = []; //lista question da api
 

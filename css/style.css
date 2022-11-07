@@ -6,6 +6,12 @@ body {
 	background-color: #e5e5e5;
 }
 
+#container_1.invisible{
+	display: none;
+
+}
+
+
 header {
 	width: 100%;
 	height: 69px;
@@ -406,6 +412,13 @@ footer {
 	font-size: 40px;
 	color: #FFFFFF;
 	font-weight: 400;
+	position: relative;
+	
+}
+
+.title_quizz p{
+	position: absolute;
+	text-align: center;
 }
 
 .question_quizz{
@@ -432,7 +445,17 @@ footer {
 	color: #FFFFFF;
 	font-weight: 700;
 	
+	
+	
 }
+
+
+.image_title{
+	height: 100%;
+	width: 100%;
+	
+}
+
 
 .alternatives{
 	margin-top: 20px;
@@ -495,6 +518,8 @@ footer {
 	font-size: 18px;
 	margin-top: 30px;
 }
+
+
 
 @media (min-width: 810px) {
 	.content-quizz {

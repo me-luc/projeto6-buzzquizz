@@ -79,13 +79,13 @@ function showQuizzPage(id) {
   cont1.classList.add("invisible");
   const screenQuizz = document.querySelector(".show_quizz_conteiner");
   screenQuizz.classList.remove("invisible");
+  document.querySelector("#container_5").classList.add("invisible");
 
   const promise = axios.get(`${apiUrl}quizzes/${id}`);
 
   //recebendo quizz específico do srv
   promise.then(renderQuizz);
   promise.catch(catchError);
-  alert("a ser implementado \nir pra quizz " + id);
 }
 
 function renderQuizz(response) {
@@ -94,7 +94,6 @@ function renderQuizz(response) {
 
   const data_quizz = response.data;
   const data_quizz_questions = data_quizz.questions;
-  console.log(data_quizz_questions[0].answers[0]);
 
   tela.innerHTML = ""
 
@@ -105,50 +104,57 @@ function renderQuizz(response) {
   	  <p>${data_quizz.title}</p>
 	</div>`;
 
+
   for (let i = 0; i < data_quizz_questions.length; i++) {
-    let contentHtml = `
+    data_quizz_questions[i].answers = data_quizz_questions[i].answers.sort(() => Math.random() - 0.5)
+
+    tela.innerHTML = `
     <div class="question_quizz">
       <div class="q_quizz" style="background-color:${data_quizz_questions[i].color}";>
         <p>${data_quizz_questions[i].title}</p>
       </div>
-      <div class="alternatives">
+      <div class="alternatives" id="alternatives-${i}">
         <div class="line_1">
           <div>
-            <img class="alternative_1" src="${data_quizz_questions[i].answers[0].image}" alt="">
-            <p>${data_quizz_questions[i].answers[0].title}</p>
+            <img class="alternative alternative_1" onclick="selectAlternative(this, ${i})" data-id="${data_quizz_questions[i].answers[0].isCorrectAnswer}" src="${data_quizz_questions[i].answers[0].image}" alt="">
+            <p class="alternative-text">${data_quizz_questions[i].answers[0].text}</p>
           </div>
           <div>
-            <img class="alternative_2" src="${data_quizz_questions[i].answers[1].image}" alt="">
-            <p>${data_quizz_questions[i].answers[1].title}</p>
+            <img class="alternative alternative_2" onclick="selectAlternative(this, ${i})" data-id="${data_quizz_questions[i].answers[1].isCorrectAnswer}" src="${data_quizz_questions[i].answers[1].image}" alt="">
+            <p class="alternative-text">${data_quizz_questions[i].answers[1].text}</p>
           </div>
-        </div>`;
-
-    if (data_quizz_questions[i].answers[2]) {
-      contentHtml += `
+        </div>
         <div class="line_2">
           <div>
-            <img  class="alternative_3" src="${data_quizz_questions[i].answers[2].image}" alt="">
-            <p>${data_quizz_questions[i].answers[2].title}</p>
-          </div>`;
-
-      if (data_quizz_questions[i].answers[3]) {
-        contentHtml += `
-              <div>
-                <img  class="alternative_4" src="${data_quizz_questions[i].answers[3].image}" alt="">
-                <p>${data_quizz_questions[i].answers[3].title}</p>
-              </div>`;
-      }
-
-      contentHtml += `</div>`;
-    }
-
-    contentHtml += `
-        </div>	
-      </div>`;
-
-    tela.innerHTML += contentHtml;
-    
+            <img  class="alternative alternative_3" onclick="selectAlternative(this, ${i})" data-id="${data_quizz_questions[i].answers[2].isCorrectAnswer}" src="${data_quizz_questions[i].answers[2].image}" alt="">
+            <p class="alternative-text">${data_quizz_questions[i].answers[2].text}</p>
+          </div>
+          <div>
+            <img  class="alternative alternative_4" onclick="selectAlternative(this, ${i})" data-id="${data_quizz_questions[i].answers[3].isCorrectAnswer}" src="${data_quizz_questions[i].answers[3].image}" alt="">
+            <p class="alternative-text">${data_quizz_questions[i].answers[3].text}</p>
+          </div>
+        </div>
+      </div>
+    </div>`;
   }
+}
+
+function selectAlternative(el, i) {
+  const isCorrectAnswer = el.getAttribute('data-id');
+  
+  const alternatives = document.querySelectorAll(`#alternatives-${i} .alternative`);
+  const alternativesText = document.querySelectorAll(`#alternatives-${i} .alternative-text`);
+  for (let y = 0; y < alternatives.length; y++) {
+    alternatives[y].classList.add('opacity');
+    alternatives[y].removeAttribute('onclick');
+    if (alternatives[y].getAttribute('data-id') == 'true') {
+      alternatives[y].parentElement.lastChild.classList.add('color-green');
+    } else {
+      alternatives[y].parentElement.lastChild.classList.add('color-red');
+    }
+  }
+  
+  el.classList.remove('opacity');
 }
 
 const final_list = []; //lista question da api
@@ -282,7 +288,7 @@ function finish_questions() {
       input_5[i].value.length > 0 &&
       verify_url(input_6[i].value) &&
       input_7[i].value.length > 0 &&
-      verify_url(input_8[i].value) &&
+      verify_url(input_8[i].value)&&
       input_9[i].value.length > 0 &&
       verify_url(input_10[i].value)
     ) {
@@ -502,12 +508,13 @@ function createQuizzApi(data) {
       });
     })
     .catch((error) => {
-      alert(error.response);
+      alert(JSON.stringify(error.response));
     });
 }
 
 function backToHome() {
   startQuizzes();
+  document.querySelector("#container_5").classList.add("invisible");
   all_quizz.classList.remove("invisible");
   createQuizz.classList.add("invisible");
 }

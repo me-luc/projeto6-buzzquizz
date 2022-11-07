@@ -103,7 +103,7 @@ section {
 }
 .title_add {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: center;
 	margin-top: 146px;
 	max-width: 1051px;
@@ -125,6 +125,8 @@ section {
 }
 
 .area_quizz {
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .create-quizz {
@@ -210,6 +212,9 @@ input {
 	opacity: 1;
 
 	margin: 15px 0;
+
+	box-sizing: border-box;
+	margin: 15px 10px 15px 0;
 }
 
 .quizz-item:hover {
@@ -412,8 +417,6 @@ footer {
 	color: #FFFFFF;
 	font-weight: 400;
 	position: relative;
-	opacity: rgba(0, 0, 0, 0.3)
-	
 }
 
 .title_quizz p{
@@ -456,9 +459,17 @@ footer {
 .image_title{
 	height: 100%;
 	width: 100%;
-	
 }
 
+.title_quizz:after {
+	content: "";
+	background-color: rgba(0, 0, 0, 0.4);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
 
 .alternatives{
 	margin-top: 20px;
@@ -523,16 +534,15 @@ footer {
 
 
 @media (min-width: 810px) {
-	.content-quizz {
+	.content_quizz {
 		display: flex;
-		justify-content: center;
 		flex-wrap: wrap;
 	}
 	.quizz-item {
-		width: 32%;
+		width: 31%;
 	}
-	.quizz-item:nth-child(even) {
-		margin: auto 1%;
+	.title_add {
+		justify-content: flex-start;
 	}
 }
 
@@ -540,5 +550,9 @@ footer {
 @media (max-width: 810px) {
 	.input-space button {
 		width: 75%;
+	}
+
+	.title_add {
+		justify-content: space-between;
 	}
 }

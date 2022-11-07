@@ -101,7 +101,7 @@ function renderQuizz(response) {
   tela.innerHTML += `
   
   	<div class="title_quizz">
-	  	<img class="image_title" src="${data_quizz.image}" alt="">
+	  	<img class="image_title" alt="" src="${data_quizz.image}"></img>
   	  <p>${data_quizz.title}</p>
 	</div>`;
 
@@ -201,26 +201,26 @@ function print_elements(qt_perguntas) {
     <div class="pergunta_x invisible" id="p_${count}">
         <div class="pergunta">
             <p>Pergunta ${count}</p>
-            <input class="input1" type="text" placeholder="Texto da pergunta" value="teste teste teste teste teste teste teste teste teste teste">
-            <input class="input2" type="text" placeholder="Cor de fundo da pergunta" value="#333333">
+            <input class="input1" type="text" placeholder="Texto da pergunta">
+            <input class="input2" type="text" placeholder="Cor de fundo da pergunta">
         </div>
         <div class="resposta_c">
             <p>Resposta correta</p>
-            <input class="input3" type="text" placeholder="Resposta correta" value="teste">
-            <input class="input4" type="text" placeholder="URL da imagem" value="https://teste.com">
+            <input class="input3" type="text" placeholder="Resposta correta">
+            <input class="input4" type="text" placeholder="URL da imagem">
         </div>
         <div class="respostas_i_1">
             <p>Respostas incorretas</p>
-            <input class="input5" type="text" placeholder="Resposta errada 1" value="teste">
-            <input class="input6" type="text" placeholder="URL da imagem 1" value="https://teste.com">
+            <input class="input5" type="text" placeholder="Resposta errada 1">
+            <input class="input6" type="text" placeholder="URL da imagem 1">
         </div>
         <div class="respostas_i_2">
-            <input class="input7" type="text" placeholder="Resposta errada 2" value="teste">
-            <input class="input8" type="text" placeholder="URL da imagem 2" value="https://teste.com">
+            <input class="input7" type="text" placeholder="Resposta errada 2">
+            <input class="input8" type="text" placeholder="URL da imagem 2">
         </div>
         <div class="respostas_i_3">
-            <input class="input9" type="text" placeholder="Resposta errada 3" value="teste">
-            <input class="input10" type="text" placeholder="URL da imagem 3" value="https://teste.com">
+            <input class="input9" type="text" placeholder="Resposta errada 3">
+            <input class="input10" type="text" placeholder="URL da imagem 3">
         </div>
     </div>`;
   }
@@ -423,10 +423,10 @@ function print_niveis(qt_niveis) {
     <div class="nivel_x invisible" id="p_${count}">
         <div class="nivel">
             <p>Nível ${count}</p>
-            <input class="nivel-input1" type="text" placeholder="Título do nível" value="teste teste teste teste teste teste teste teste teste teste">
-            <input class="nivel-input2" type="text" placeholder="% de acerto mínima" value="0">
-            <input class="nivel-input3" type="text" placeholder="URL da imagem do nível" value="https://teste.com">
-						<textarea cols="30" rows="10" class="nivel-input4" placeholder="Descrição do nível">teste teste teste teste teste teste teste teste</textarea>
+            <input class="nivel-input1" type="text" placeholder="Título do nível">
+            <input class="nivel-input2" type="text" placeholder="% de acerto mínima">
+            <input class="nivel-input3" type="text" placeholder="URL da imagem do nível">
+						<textarea cols="30" rows="10" class="nivel-input4" placeholder="Descrição do nível"></textarea>
         </div>
     </div>`;
   }

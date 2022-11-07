@@ -98,7 +98,7 @@ function renderQuizz(response) {
 
   const data_quizz = response.data
   const data_quizz_questions = data_quizz.questions
-  console.log(data_quizz_questions[0].answers[0])
+  console.log(data_quizz_questions[0].answers[0].image)
 
   tela.innerHTML += `
   
@@ -120,28 +120,28 @@ function renderQuizz(response) {
         <div class="line_1">
           <div>
             <img class="alternative_1" src="${data_quizz_questions[i].answers[0].image}" alt="">
-            <p>${data_quizz.quetions[i].answers[0].title}</p>
+            <p>${data_quizz_questions[i].answers[0].title}</p>
           </div>
           <div>
             <img class="alternative_2" src="${data_quizz_questions[i].answers[1].image}" alt="">
-            <p>${data_quizz.quetions[i].answers[1].title}</p>
+            <p>${data_quizz_questions[i].answers[1].title}</p>
           </div>
         </div>
         <div class="line_2">
           <div>
             <img  class="alternative_3" src="${data_quizz_questions[i].answers[2].image}" alt="">
-            <p>${data_quizz.quetions[i].answers[2].title}</p>
+            <p>${data_quizz_questions[i].answers[2].title}</p>
           </div>
           <div>
             <img  class="alternative_4" src="${data_quizz_questions[i].answers[3].image}" alt="">
-            <p>${data_quizz.quetions[i].answers[3].title}</p>
+            <p>${data_quizz_questions[i].answers[3].title}</p>
           </div>
         </div>
       </div>	
     </div>`
 
     tela_title.style.backgroundColor = `${data_quizz_questions[i].color}`
-  
+  alert('chegou')
 
 }}
 

@@ -54,6 +54,26 @@ function renderQuizzes(answer) {
 
 function showQuizPage(element) {
 	alert("a ser implementado \nir pra quizz " + element.id);
+
+    const main_div = document.getElementById("container_1");
+	main_div.classList.add("invisible");
+    const div_quizz = document.querySelector(".show_quizz_conteiner");
+	div_quizz.classList.remove("invisible");
+    
+
+
+
+    let promise = get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${element.id}`)
+
+    promise.then(ren_quizz)
+
+}
+
+function ren_quizz(quizz){
+
+    const quizz_questions = quizz.data
+    console.log(quizz_questions)
+
 }
 //o numero dentro da lista obtido na ultima tela
 

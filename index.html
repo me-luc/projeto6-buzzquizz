@@ -9,7 +9,7 @@
 		<title>BuzzQuizz</title>
 	</head>
 	<body>
-		<div id="container_1" class="">
+		<div id="container_1" class=>
 			<header>
 				<p>BuzzQuizz</p>
 			</header>
@@ -32,40 +32,44 @@
 					</div>
 				</div>
 
-				<!--CRIAR QUIZZ-->
-				<div class="create-quizz invisible">
-					<div class="start">
-						<p>Comece pelo começo</p>
-						<div class="input-space">
-							<input
-								type="text"
-								class="title"
-								placeholder="Título do seu quizz" />
-							<input
-								type="text"
-								class="url"
-								placeholder="URL da imagem do seu quizz" />
-							<input
-								type="text"
-								class="nQuestions"
-								placeholder="Quantidade de perguntas do quizz" />
-							<input
-								type="text"
-								class="nLevels"
-								placeholder="Quantidade de níveis do quizz" />
-							<button onclick="checkBasicInfo()">
-								Prosseguir para criar perguntas
-							</button>
-						</div>
-					</div>
-				</div>
 				<div class="all_quizz">
 					<p>Todos os Quizzes</p>
 					<div class="content_quizz"></div>
-				</div>
+				</div>	
 			</section>
 		</div>
 		<!--fim div conteiner 1-->
+
+		<!--CRIAR QUIZZ-->
+		<section>
+			<div class="create-quizz invisible">
+				<div class="start">
+					<p>Comece pelo começo</p>
+					<div class="input-space">
+						<input
+							type="text"
+							class="title"
+							placeholder="Título do seu quizz" />
+						<input
+							type="text"
+							class="url"
+							placeholder="URL da imagem do seu quizz" />
+						<input
+							type="text"
+							class="nQuestions"
+							placeholder="Quantidade de perguntas do quizz" />
+						<input
+							type="text"
+							class="nLevels"
+							placeholder="Quantidade de níveis do quizz" />
+						<button onclick="checkBasicInfo()">
+							Prosseguir para criar perguntas
+						</button>
+					</div>
+				</div>
+			</div>
+		</section>			
+
 		<div id="container_3" class="container_3 invisible">
 			<header>
 				<p>BuzzQuizz</p>
@@ -144,6 +148,45 @@
 			</footer>
 		</div>
 		<!--fim div conteiner 3-->
+
+		<!--mostrar quizz-->
+		<div class="show_quizz_conteiner invisible">
+			<header>
+				<p>BuzzQuizz</p>
+			</header>
+			<div class="title_quizz">
+				<p>olá</p>
+			</div>
+			<div class="question_quizz">
+				<div class="q_quizz">
+					<p>olá</p>
+				</div>
+				<div class="alternatives">
+					<div class="line_1">
+						<div>
+							<img class="alternative_1" src="" alt="">
+							<p>oi</p>
+						</div>
+						<div>
+							<img class="alternative_2" src="" alt="">
+							<p>oi</p>
+						</div>
+					</div>
+					<div class="line_2">
+						<div>
+							<img  class="alternative_3" src="" alt="">
+							<p>oi</p>
+						</div>
+						<div>
+							<img  class="alternative_4" src="" alt="">
+							<p>oi</p>
+						</div>
+					</div>
+				</div>	
+			</div>
+
+		</div>
+
 
 		<script
 			type="module"

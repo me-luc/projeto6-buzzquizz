@@ -46,9 +46,9 @@ function renderQuizzes(answer) {
 }
 
 function renderMyQuizzes(quizzList) {
-  const idList = JSON.parse(localStorage.getItem('idList')) || [];
+  const idList = JSON.parse(localStorage.getItem("idList")) || [];
 
-  const myQuizzList = quizzList.filter(quizz => {
+  const myQuizzList = quizzList.filter((quizz) => {
     return idList.includes(quizz.id);
   });
 
@@ -75,43 +75,36 @@ function renderMyQuizzes(quizzList) {
 }
 
 function showQuizzPage(id) {
+  const cont1 = document.getElementById("container_1");
+  cont1.classList.add("invisible");
+  const screenQuizz = document.querySelector(".show_quizz_conteiner");
+  screenQuizz.classList.remove("invisible");
 
-	const cont1 = document.getElementById("container_1");
-	cont1.classList.add("invisible");
-	const screenQuizz = document.querySelector(".show_quizz_conteiner");
-	screenQuizz.classList.remove("invisible");
+  const promise = axios.get(`${apiUrl}quizzes/${id}`);
 
-
-
-	const promise = axios.get(`${apiUrl}quizzes/${id}`);
-
-	//recebendo quizz específico do srv
-	promise.then(renderQuizz);
-	promise.catch(catchError);
-	alert("a ser implementado \nir pra quizz " + id);
+  //recebendo quizz específico do srv
+  promise.then(renderQuizz);
+  promise.catch(catchError);
+  alert("a ser implementado \nir pra quizz " + id);
 }
-
 
 function renderQuizz(response) {
   const tela = document.querySelector(".show_quizz_conteiner");
-  const tela_title = document.querySelector(".q_quizz")
+  const tela_title = document.querySelector(".q_quizz");
 
-  const data_quizz = response.data
-  const data_quizz_questions = data_quizz.questions
-  console.log(data_quizz_questions[0].answers[0].image)
+  const data_quizz = response.data;
+  const data_quizz_questions = data_quizz.questions;
+  console.log(data_quizz_questions[0].answers[0]);
 
   tela.innerHTML += `
   
   	<div class="title_quizz">
 	  	<img class="image_title" src="${data_quizz.image}" alt="">
   	  <p>${data_quizz.title}</p>
-	</div>`
+	</div>`;
 
-
-
-
-  for(let i=0; i< data_quizz_questions.length;i++){
-    tela.innerHTML += `
+  for (let i = 0; i < data_quizz_questions.length; i++) {
+    let contentHtml = `
     <div class="question_quizz">
       <div class="q_quizz">
         <p>${data_quizz_questions[i].title}</p>
@@ -126,24 +119,35 @@ function renderQuizz(response) {
             <img class="alternative_2" src="${data_quizz_questions[i].answers[1].image}" alt="">
             <p>${data_quizz_questions[i].answers[1].title}</p>
           </div>
-        </div>
+        </div>`;
+
+    if (data_quizz_questions[i].answers[2]) {
+      contentHtml += `
         <div class="line_2">
           <div>
             <img  class="alternative_3" src="${data_quizz_questions[i].answers[2].image}" alt="">
-            <p>${data_quizz_questions[i].answers[2].title}</p>
-          </div>
-          <div>
-            <img  class="alternative_4" src="${data_quizz_questions[i].answers[3].image}" alt="">
-            <p>${data_quizz_questions[i].answers[3].title}</p>
-          </div>
-        </div>
-      </div>	
-    </div>`
+            <p>${data_quizz.quetions[i].answers[2].title}</p>
+          </div>`;
 
-    tela_title.style.backgroundColor = `${data_quizz_questions[i].color}`
-  alert('chegou')
+      if (data_quizz_questions[i].answers[3]) {
+        contentHtml += `
+              <div>
+                <img  class="alternative_4" src="${data_quizz_questions[i].answers[3].image}" alt="">
+                <p>${data_quizz.quetions[i].answers[3].title}</p>
+              </div>`;
+      }
 
-}}
+      contentHtml += `</div>`;
+    }
+
+    contentHtml += `
+        </div>	
+      </div>`;
+
+    tela.innerHTML += contentHtml;
+    tela_title.style.backgroundColor = `${data_quizz_questions[i].color}`;
+  }
+}
 
 const final_list = []; //lista question da api
 
@@ -308,12 +312,12 @@ function finish_questions() {
         ],
       });
 
-			const cont4 = document.querySelector("#container_4");
-			cont4.classList.remove("invisible");
-			const screenQuestions = document.querySelector(".container_3");
-			screenQuestions.classList.add("invisible");
-			//==> CHAMAR FUNÇÃO PRA CRIAR NÍVEIS
-			print_niveis(nLevels.value);
+      const cont4 = document.querySelector("#container_4");
+      cont4.classList.remove("invisible");
+      const screenQuestions = document.querySelector(".container_3");
+      screenQuestions.classList.add("invisible");
+      //==> CHAMAR FUNÇÃO PRA CRIAR NÍVEIS
+      print_niveis(nLevels.value);
     } else {
       alert("A validação falhou!");
       break;
@@ -428,78 +432,76 @@ function print_niveis(qt_niveis) {
 
 let niveisCreated = [];
 function finish_quizz() {
-	let input_1 = document.querySelectorAll(".nivel-input1");
-	let input_2 = document.querySelectorAll(".nivel-input2");
-	let input_3 = document.querySelectorAll(".nivel-input3");
-	let input_4 = document.querySelectorAll(".nivel-input4");
+  let input_1 = document.querySelectorAll(".nivel-input1");
+  let input_2 = document.querySelectorAll(".nivel-input2");
+  let input_3 = document.querySelectorAll(".nivel-input3");
+  let input_4 = document.querySelectorAll(".nivel-input4");
 
-	let minValue = 100;
-	// Verifica se tem pelo menos 1 com 0% de acerto mínimo
-	for (let i = 0; i < input_2.length; i++) {
-		if (input_2[i].value < minValue)
-			minValue = input_2[i].value;
-	}
+  let minValue = 100;
+  // Verifica se tem pelo menos 1 com 0% de acerto mínimo
+  for (let i = 0; i < input_2.length; i++) {
+    if (input_2[i].value < minValue) minValue = input_2[i].value;
+  }
 
-	if (minValue > 0) {
-		alert("A validação falhou!");
-		return false;
-	}
+  if (minValue > 0) {
+    alert("A validação falhou!");
+    return false;
+  }
 
-	for (let i = 0; i < input_1.length; i++) {
-		if (
-			input_1[i].value.length < 10 ||
-			input_2[i].value.length < 0 ||
-			input_2[i].value.length > 100 ||
-			!verify_url(input_3[i].value) ||
-			input_4[i].value.length < 30
-		) {
-			alert("A validação falhou!");
-			return false;
-		}
-	}
+  for (let i = 0; i < input_1.length; i++) {
+    if (
+      input_1[i].value.length < 10 ||
+      input_2[i].value.length < 0 ||
+      input_2[i].value.length > 100 ||
+      !verify_url(input_3[i].value) ||
+      input_4[i].value.length < 30
+    ) {
+      alert("A validação falhou!");
+      return false;
+    }
+  }
 
-	niveisCreated = [];
+  niveisCreated = [];
 
-	for (let i = 0; i < input_1.length; i++) {
-		niveisCreated.push({
-			title: input_1[i].value,
-			image: input_2[i].value,
-			text: input_2[i].value,
-			minValue: input_2[i].value,
-		});
-	}
+  for (let i = 0; i < input_1.length; i++) {
+    niveisCreated.push({
+      title: input_1[i].value,
+      image: input_2[i].value,
+      text: input_2[i].value,
+      minValue: input_2[i].value,
+    });
+  }
 
-	const titleQuizz = document.querySelector(".input-space .title").value;
+  const titleQuizz = document.querySelector(".input-space .title").value;
   const urlQuizz = document.querySelector(".input-space .url").value;
 
-	const quizzData = {
-		title: titleQuizz,
-		image: urlQuizz,
-		questions: final_list,
-		levels: niveisCreated
-	}
+  const quizzData = {
+    title: titleQuizz,
+    image: urlQuizz,
+    questions: final_list,
+    levels: niveisCreated,
+  };
 
   createQuizzApi(quizzData);
 }
 
 // Cadastra o quizz
 function createQuizzApi(data) {
-  axios.post(
-    `${apiUrl}quizzes`,
-    data
-  ).then(response => {
-    const id = response.data.id;
-    storeLocal(id);
-    
-    document.querySelector("#container_4").classList.add("invisible");
-    document.querySelector("#container_5").classList.remove("invisible");
-    document.querySelector('#access_quizz')
-      .addEventListener('click', () => {
+  axios
+    .post(`${apiUrl}quizzes`, data)
+    .then((response) => {
+      const id = response.data.id;
+      storeLocal(id);
+
+      document.querySelector("#container_4").classList.add("invisible");
+      document.querySelector("#container_5").classList.remove("invisible");
+      document.querySelector("#access_quizz").addEventListener("click", () => {
         showQuizzPage(id);
       });
-  }).catch(error => {
-    alert(error.response);
-  });
+    })
+    .catch((error) => {
+      alert(error.response);
+    });
 }
 
 function backToHome() {

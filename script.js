@@ -96,6 +96,8 @@ function renderQuizz(response) {
   const data_quizz_questions = data_quizz.questions;
   console.log(data_quizz_questions[0].answers[0]);
 
+  tela.innerHTML = ""
+
   tela.innerHTML += `
   
   	<div class="title_quizz">
@@ -106,7 +108,7 @@ function renderQuizz(response) {
   for (let i = 0; i < data_quizz_questions.length; i++) {
     let contentHtml = `
     <div class="question_quizz">
-      <div class="q_quizz">
+      <div class="q_quizz" style="background-color:${data_quizz_questions[i].color}";>
         <p>${data_quizz_questions[i].title}</p>
       </div>
       <div class="alternatives">
@@ -126,14 +128,14 @@ function renderQuizz(response) {
         <div class="line_2">
           <div>
             <img  class="alternative_3" src="${data_quizz_questions[i].answers[2].image}" alt="">
-            <p>${data_quizz.quetions[i].answers[2].title}</p>
+            <p>${data_quizz_questions[i].answers[2].title}</p>
           </div>`;
 
       if (data_quizz_questions[i].answers[3]) {
         contentHtml += `
               <div>
                 <img  class="alternative_4" src="${data_quizz_questions[i].answers[3].image}" alt="">
-                <p>${data_quizz.quetions[i].answers[3].title}</p>
+                <p>${data_quizz_questions[i].answers[3].title}</p>
               </div>`;
       }
 
@@ -145,7 +147,7 @@ function renderQuizz(response) {
       </div>`;
 
     tela.innerHTML += contentHtml;
-    tela_title.style.backgroundColor = `${data_quizz_questions[i].color}`;
+    
   }
 }
 

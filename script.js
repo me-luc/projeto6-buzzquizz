@@ -1,21 +1,13 @@
 const apiUrl = "https://mock-api.driven.com.br/api/v4/buzzquizz/";
 
-//para teste
-for (let index = 0; index < 10; index++) {
-  storeLocal(index + 100);
-}
-const obj = localStorage.getItem("idList");
-const dados = JSON.stringify(obj);
+const your_quizz = document.querySelector(".your_quizz");
+const make_quizz = document.querySelector(".make_quizz");
+const all_quizz = document.querySelector(".all_quizz");
+const createQuizz = document.querySelector(".create-quizz");
 
 /* ===== RENDERIZAR LISTA DE QUIZZES ===== */
 function startQuizzes() {
-  localStorage.setItem("nomes", "kik");
-  const a = localStorage.getItem("nomes");
-  alert(a);
-  //const promise = axios.get(`${apiUrl}quizzes`);
-  const promise = axios.get(
-    "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
-  );
+  const promise = axios.get(`${apiUrl}quizzes`);
 
   //recebendo quizzes do srv
   promise.then(renderQuizzes);
@@ -25,19 +17,21 @@ function catchError(answer) {
   alert(answer.response);
 }
 
+startQuizzes();
+
 //renderizar quizzes
 function renderQuizzes(answer) {
   const quizzList = answer.data;
 
-  console.log(quizzList);
+  renderMyQuizzes(quizzList);
 
-  const quizzSpace = document.querySelector(".content-quizz");
+  const quizzSpace = document.querySelector(".content_quizz");
   quizzSpace.innerHTML = "";
 
   for (let i = 0; i < quizzList.length; i++) {
     let quizz = quizzList[i];
     quizzSpace.innerHTML += `
-            <div class="quizz-item" onclick="showQuizPage(this)">
+            <div class="quizz-item" onclick="showQuizzPage(${quizz.id})">
                 <div class="image-bkg">
                     <p id="quizz-title">
                         ${quizz.title}
@@ -51,10 +45,48 @@ function renderQuizzes(answer) {
   }
 }
 
-function showQuizPage(element) {
-  alert("a ser implementado \nir pra quizz " + element.id);
+function renderMyQuizzes(quizzList) {
+  const idList = JSON.parse(localStorage.getItem('idList')) || [];
+
+  const myQuizzList = quizzList.filter(quizz => {
+    return idList.includes(quizz.id);
+  });
+
+  const myQuizzSpace = document.querySelector(".area_quizz");
+  myQuizzSpace.innerHTML = "";
+
+  for (let i = 0; i < myQuizzList.length; i++) {
+    let quizz = myQuizzList[i];
+    myQuizzSpace.innerHTML += `
+            <div class="quizz-item" onclick="showQuizzPage(${quizz.title})">
+                <div class="image-bkg">
+                    <p id="quizz-title">
+                        ${quizz.title}
+                    </p>
+                </div>
+            </div>
+        `;
+    const lastQuizz = myQuizzSpace.lastElementChild;
+    lastQuizz.id = quizz.id;
+    lastQuizz.style.backgroundImage = `url(${quizz.image})`;
+    your_quizz.classList.remove("invisible");
+    make_quizz.classList.add("invisible");
+  }
+}
+
+function showQuizzPage(id) {
+  const promise = axios.get(`${apiUrl}quizzes/${id}`);
+
+  //recebendo quizz específico do srv
+  promise.then(renderQuizz);
+  promise.catch(catchError);
+  alert("a ser implementado \nir pra quizz " + id);
 }
 //o numero dentro da lista obtido na ultima tela
+
+function renderQuizz(response) {
+  // Exibir tela de quizz específico
+}
 
 const final_list = []; //lista question da api
 
@@ -239,11 +271,6 @@ function jump_level_screen() {
 }
 
 function showCreateQuizzPage() {
-  const your_quizz = document.querySelector(".your_quizz");
-  const make_quizz = document.querySelector(".make_quizz");
-  const all_quizz = document.querySelector(".all_quizz");
-  const createQuizz = document.querySelector(".create-quizz");
-
   your_quizz.classList.add("invisible");
   make_quizz.classList.add("invisible");
   all_quizz.classList.add("invisible");
@@ -305,12 +332,12 @@ function storeLocal(id) {
 
   //verificar se key está vazia, se estiver adiciona items
   if (idList === null) {
-    let arrStr = JSON.stringify([{ id: id }]);
+    let arrStr = JSON.stringify([id]);
     localStorage.setItem("idList", arrStr);
   } else {
     //caso nao esteja pega items anteriores e adiciona o novo
     var objList = JSON.parse(idList); //recebendo e transformando em array
-    objList.push({ id: id });
+    objList.push(id);
     var objList = JSON.stringify(objList);
     localStorage.setItem("idList", objList);
   }
@@ -395,12 +422,31 @@ function finish_quizz() {
 		levels: niveisCreated
 	}
 
-	console.log(quizzData); return false;
+  createQuizzApi(quizzData);
+}
 
-	const cont4 = document.querySelector("#container_4");
-	cont4.classList.remove("invisible");
-	const screenQuestions = document.querySelector(".container_3");
-	screenQuestions.classList.add("invisible");
-	//==> CHAMAR FUNÇÃO PRA CRIAR NÍVEIS
-	print_niveis(nLevels.value);
+// Cadastra o quizz
+function createQuizzApi(data) {
+  axios.post(
+    `${apiUrl}quizzes`,
+    data
+  ).then(response => {
+    const id = response.data.id;
+    storeLocal(id);
+    
+    document.querySelector("#container_4").classList.add("invisible");
+    document.querySelector("#container_5").classList.remove("invisible");
+    document.querySelector('#access_quizz')
+      .addEventListener('click', () => {
+        showQuizzPage(id);
+      });
+  }).catch(error => {
+    alert(error.response);
+  });
+}
+
+function backToHome() {
+  startQuizzes();
+  all_quizz.classList.remove("invisible");
+  createQuizz.classList.add("invisible");
 }
